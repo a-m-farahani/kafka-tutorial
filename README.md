@@ -12,21 +12,21 @@
 ### Getting Started
 Apache Kafka is an open-source fault-tolerant messaging system based on the publish-subscribe model. Kafka is known for its speed, scalability, and distributed architecture by design.
 Use cases:
-- Microservices Communication: It's often used as a communication backbone for microservices architectures, ensuring reliable and asynchronous communication between services.
-- Log and Event Streaming: Kafka is ideal for collecting and processing log and event data from various sources, making it valuable for monitoring, analytics, and auditing.
-- Data Integration: Many organizations use Kafka to connect disparate data systems, enabling efficient data sharing and integration between applications.
-- Real-time Analytics: Kafka enables real-time data streaming, supporting applications for real-time analytics, dashboarding, and decision-making.
-- IoT and Sensor Data: It's an excellent choice for managing data from Internet of Things (IoT) devices and sensors, allowing for the real-time processing of vast amounts of data.
-- Machine Learning and AI: Kafka can be integrated into machine learning and artificial intelligence pipelines to facilitate real-time data ingestion and model training.
+- **Microservices Communication:** It's often used as a communication backbone for microservices architectures, ensuring reliable and asynchronous communication between services.
+- **Log and Event Streaming:** Kafka is ideal for collecting and processing log and event data from various sources, making it valuable for monitoring, analytics, and auditing.
+- **Data Integration:** Many organizations use Kafka to connect disparate data systems, enabling efficient data sharing and integration between applications.
+- **Real-time Analytics:** Kafka enables real-time data streaming, supporting applications for real-time analytics, dashboarding, and decision-making.
+- **IoT and Sensor Data:** It's an excellent choice for managing data from Internet of Things (IoT) devices and sensors, allowing for the real-time processing of vast amounts of data.
+- **Machine Learning and AI:** Kafka can be integrated into machine learning and artificial intelligence pipelines to facilitate real-time data ingestion and model training.
 
 <p align="center">
     <img src="https://github.com/a-m-farahani/kafka-tutorial/blob/main/assets/kafka-producer-consumer.png?raw=true" alt="kafka message broker" width="60%">
 </p>
 
-What are producers:
+What are **producers**:
 > Producers are clients that write events to Kafka. The producer specifies the topics they will write to and the producer controls how events are assigned to partitions within a topic. This can be done in a round-robin fashion for load balancing or it can be done according to some semantic partition function such as by the event key.
 
-What are consumers:
+What are **consumers**:
 > Consumers are clients that read events from Kafka.
 
 
