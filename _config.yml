@@ -1,1 +1,5 @@
-theme: Cayman
+title: Kafka Tutorials
+description: A simple tutorial for deployign a kafka server
+show_downloads: false
+google_analytics:
+theme: jekyll-theme-cayman
