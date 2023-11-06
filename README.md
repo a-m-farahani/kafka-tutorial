@@ -32,7 +32,7 @@ What are **consumers**:
 
 In this context, we are setting up a Kafka server within a Docker environment. To streamline the process, we'll create a bash script file (deploy.sh) responsible for pulling and launching "kafka-server" and "kafka-topic-creator" services.
 
-[deploy.sh](src/deploy.sh)
+[deploy.sh](src/getting-started/deploy.sh)
 ```{.bash .numberLines .lineAnchors}
 #!/bin/bash
 
@@ -43,7 +43,7 @@ docker compose -f kafka-compose.yaml up -d
 
 At line 4 we pull the Kafka image from docker hub, and in line 5 we use `docker compose` command to run two docker services. The services are defined in `kafka-compose.yaml` file.
 
-[kafka-compose.yaml](src/kafka-compose.yaml)
+[kafka-compose.yaml](src/getting-started/kafka-compose.yaml)
 ```yaml
  version: "3.8"
 
@@ -86,7 +86,7 @@ volumes:
   kafka-log:
 ```
 
-In the [kafka-compose.yaml](src/kafka-compose.yaml), we specify the Docker services and configure essential environmental variables required to initiate a Kafka broker. Additionally, we expose port `9092` to enable access to the Kafka server from outside the Docker network. If you are familiar with Kafka you can see that we use the `Raft` mode instead of `zookeepers`. Raft mode provides a more streamlined and self-contained way for Kafka to manage controller elections without the need for an external coordination service like Zookeeper. This can simplify the deployment and management of Kafka clusters.
+In the [kafka-compose.yaml](src/getting-started/kafka-compose.yaml), we specify the Docker services and configure essential environmental variables required to initiate a Kafka broker. Additionally, we expose port `9092` to enable access to the Kafka server from outside the Docker network. If you are familiar with Kafka you can see that we use the `Raft` mode instead of `zookeepers`. Raft mode provides a more streamlined and self-contained way for Kafka to manage controller elections without the need for an external coordination service like Zookeeper. This can simplify the deployment and management of Kafka clusters.
 The `kafka-topic-creator` service verifies the availability of the "kafka-server" by running the `cub kafka-ready` command. Once the kafka-server is confirmed to be ready to receive commands, it proceeds to execute the `kafka-topic` command, creating a topic named "sensors". Subsequently, the service exits after successfully creating the topic.
 
 Now we have a working kafka broker with a topic named "sensors". We will create two python scripts, one for Producing messages and another for Consuming them. We will use "kafka-python" library for working with kafka in python. to install "kafka-python" you can run the following command:
@@ -94,7 +94,7 @@ Now we have a working kafka broker with a topic named "sensors". We will create 
 
 the producer will produce a json message every 5 seconds and sends(or publishes) it to "sensors" topic.
 
-[producer.py](src/producer.py)
+[producer.py](src/getting-started/producer.py)
 ```python
 from kafka import KafkaProducer
 import json
@@ -116,7 +116,7 @@ In this code we simply create a "KafkaProducer" object and set its "value_serial
 
 the consumer listens to topic "sensors" and prints(or consumes) every message.
 
-[consumer.py](src/consumer.py)
+[consumer.py](src/getting-started/consumer.py)
 ```python
 from kafka import KafkaConsumer
 import json
