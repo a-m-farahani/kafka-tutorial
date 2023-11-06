@@ -1,4 +1,6 @@
-<img src="./assets/kafka.png" align="right" alt="Apache Kafka" width="70%">
+<p align="center">
+    <img src="./assets/kafka.png" alt="Apache Kafka" width="70%">
+</p>
 
 # Dive into Kafka
 
