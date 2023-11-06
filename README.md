@@ -6,6 +6,7 @@
 
 ### Table of Contents:
 - [Getting Started](#getting-started)
+- [Schema Registry](#schema-registry)
 - [Kafka Connect](#kafka-connect)
 
 ---
@@ -142,5 +143,7 @@ consumer = KafkaConsumer(
 for message in consumer:
     print(f"[recv] offset: {message.offset}, data: {message.value}")
 ```
-
 ---
+
+### Schema Registry
+
