@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./assets/kafka.png" alt="Apache Kafka" width="70%">
+    <img src="./assets/kafka.png" alt="Apache Kafka" width="60%">
 </p>
 
 # Dive into Kafka
@@ -22,7 +22,7 @@ Use cases:
 - **Machine Learning and AI:** Kafka can be integrated into machine learning and artificial intelligence pipelines to facilitate real-time data ingestion and model training.
 
 <p align="center">
-    <img src="https://github.com/a-m-farahani/kafka-tutorial/blob/main/assets/kafka-producer-consumer.png?raw=true" alt="kafka message broker" width="60%">
+    <img src="https://github.com/a-m-farahani/kafka-tutorial/blob/main/assets/kafka-producer-consumer.png?raw=true" alt="kafka message broker" width="50%">
 </p>
 
 What are **producers**:
