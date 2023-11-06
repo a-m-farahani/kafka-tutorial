@@ -1,5 +1,5 @@
-title: Kafka Tutorials
-description: A simple tutorial for deployign a kafka server
+title: Apache Kafka
+description: A simple tutorial for getting started with apache kafka and kafka-connect
 show_downloads: false
 google_analytics:
 theme: jekyll-theme-cayman
