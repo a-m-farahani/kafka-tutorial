@@ -10,7 +10,9 @@
 
 ---
 ### Getting Started
+<div align="justify">
 Apache Kafka is an open-source fault-tolerant messaging system based on the publish-subscribe model. Kafka is known for its speed, scalability, and distributed architecture by design.
+
 Use cases:
 - **Microservices Communication:** It's often used as a communication backbone for microservices architectures, ensuring reliable and asynchronous communication between services.
 - **Log and Event Streaming:** Kafka is ideal for collecting and processing log and event data from various sources, making it valuable for monitoring, analytics, and auditing.
@@ -28,7 +30,6 @@ What are **producers**:
 
 What are **consumers**:
 > Consumers are clients that read events from Kafka.
-
 
 In this context, we are setting up a Kafka server within a Docker environment. To streamline the process, we'll create a bash script file (deploy.sh) responsible for pulling and launching "kafka-server" and "kafka-topic-creator" services.
 
@@ -131,5 +132,6 @@ consumer = KafkaConsumer(
 for message in consumer:
     print(f"[recv] offset: {message.offset}, data: {message.value}")
 ```
+</div>
 
 ---
