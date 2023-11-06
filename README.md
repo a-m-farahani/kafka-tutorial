@@ -12,6 +12,7 @@
 ### Getting Started
 <div align="justify">
 Apache Kafka is an open-source fault-tolerant messaging system based on the publish-subscribe model. Kafka is known for its speed, scalability, and distributed architecture by design.
+</div>
 
 Use cases:
 - **Microservices Communication:** It's often used as a communication backbone for microservices architectures, ensuring reliable and asynchronous communication between services.
@@ -31,10 +32,12 @@ What are **producers**:
 What are **consumers**:
 > Consumers are clients that read events from Kafka.
 
+<div align="justify">
 In this context, we are setting up a Kafka server within a Docker environment. To streamline the process, we'll create a bash script file (deploy.sh) responsible for pulling and launching "kafka-server" and "kafka-topic-creator" services.
+</div>
 
 [deploy.sh](src/getting-started/deploy.sh)
-```{.bash .numberLines .lineAnchors}
+```bash
 #!/bin/bash
 
 echo "pulling confluent kafka image from docker hub..."
@@ -87,6 +90,7 @@ volumes:
   kafka-log:
 ```
 
+<div align="justify">
 In the [kafka-compose.yaml](src/getting-started/kafka-compose.yaml), we specify the Docker services and configure essential environmental variables required to initiate a Kafka broker. Additionally, we expose port `9092` to enable access to the Kafka server from outside the Docker network. If you are familiar with Kafka you can see that we use the `Raft` mode instead of `zookeepers`. Raft mode provides a more streamlined and self-contained way for Kafka to manage controller elections without the need for an external coordination service like Zookeeper. This can simplify the deployment and management of Kafka clusters.
 The `kafka-topic-creator` service verifies the availability of the "kafka-server" by running the `cub kafka-ready` command. Once the kafka-server is confirmed to be ready to receive commands, it proceeds to execute the `kafka-topic` command, creating a topic named "sensors". Subsequently, the service exits after successfully creating the topic.
 
@@ -94,6 +98,7 @@ Now we have a working kafka broker with a topic named "sensors". We will create 
 ```pip install kafka-python```
 
 the producer will produce a json message every 5 seconds and sends(or publishes) it to "sensors" topic.
+</div>
 
 [producer.py](src/getting-started/producer.py)
 ```python
@@ -113,9 +118,12 @@ while True:
     time.sleep(5)
 ```
 
-In this code we simply create a "KafkaProducer" object and set its "value_serializer" to a lambda function which gets a dictionary object and converts it to a text string.
 
-the consumer listens to topic "sensors" and prints(or consumes) every message.
+<div align="justify">
+In this code we simply create a "KafkaProducer" object and set its "value_serializer" to a lambda function which gets a dictionary object and converts it to a text string.
+</div>
+
+The consumer listens to topic "sensors" and prints(or consumes) every message.
 
 [consumer.py](src/getting-started/consumer.py)
 ```python
@@ -132,6 +140,5 @@ consumer = KafkaConsumer(
 for message in consumer:
     print(f"[recv] offset: {message.offset}, data: {message.value}")
 ```
-</div>
 
 ---
