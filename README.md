@@ -143,6 +143,12 @@ consumer = KafkaConsumer(
 for message in consumer:
     print(f"[recv] offset: {message.offset}, data: {message.value}")
 ```
+
+here is the result of running both producer and consumer scripts:
+<p align="center">
+    <img src="./assets/kafka-test.png" alt="Apache Kafka" width="60%">
+</p>
+
 ---
 
 ### Schema Registry
