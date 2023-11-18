@@ -54,7 +54,7 @@ At line 4 we pull the Kafka image from docker hub, and in line 5 we use `docker 
 
 services:
   kafka-server:
-      image: cp-kafka:7.5.0
+      image: confluentinc/cp-kafka:7.5.0
       hostname: kafka-server
       container_name: kafka-server
       ports:
@@ -71,9 +71,11 @@ services:
         KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka-server:19092"
         KAFKA_INTER_BROKER_LISTENER_NAME: "PLAINTEXT"
         KAFKA_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
+        KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+        KAFKA_DEFAULT_REPLICATION_FACTOR: 1
       
   kafka-topic-creator:
-    image: cp-kafka:7.5.0
+    image: confluentinc/cp-kafka:7.5.0
     hostname: kafka-topic-creator
     container_name: kafka-topic-creator
     depends_on:
