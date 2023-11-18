@@ -162,3 +162,4 @@ Schema registry is a service in the Kafka ecosystem that is used for managing an
 > Schema Registry provides several benefits, including data validation, compatibility checking, versioning, and evolution. It also simplifies the development and maintenance of data pipelines and reduces the risk of data compatibility issues, data corruption, and data loss.
 
 
+to be continued ...
