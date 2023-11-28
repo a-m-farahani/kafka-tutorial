@@ -1,3 +1,5 @@
+<meta name="google-site-verification" content="BsGR37eVpXZMwXmzj4m49r8c8HIeyuIKjAjQNXevVa4" />
+
 <p align="center">
     <img src="./assets/kafka.png" alt="Apache Kafka" width="60%">
 </p>
