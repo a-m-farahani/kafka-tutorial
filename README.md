@@ -1,6 +1,3 @@
-<head>
-    <meta name="google-site-verification" content="BsGR37eVpXZMwXmzj4m49r8c8HIeyuIKjAjQNXevVa4" />
-</head>
 
 <p align="center">
     <img src="./assets/kafka.png" alt="Apache Kafka" width="60%">
@@ -241,6 +238,7 @@ else:
 As can be seen, we simply define a string variable containing the protobuf definition. We simply send a ```POST``` request to the schema-registry web service and ask it to register our schema into ```sensors``` subject. Note that we specified the type of our schema by defining ```"schemaType": "PROTOBUF"```. If you want to register a json schema, you should set ```"schemaType": "JSON"```. [register-json-schema.py](src/schema-registry/register-json-schema.py) shows an example of registering a json schema.
 
 After registering a schema in ```schema-registry``` you can verify that by sending a ```GET``` request to its web service or simply open your browser and go to folloing URL:
+
 ```http://localhost:8081/subjects/sensors/versions/```
 or
 ```http://192.168.210.128:8081/subjects/```
