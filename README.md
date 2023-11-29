@@ -246,7 +246,9 @@ http://localhost:8081/subjects/
 ```
 
 In general, the URL format is as follows:
-```http://your-schema-registry-url/subjects/your-subject-name/versions```
+```
+http://your-schema-registry-url/subjects/your-subject-name/versions
+```
 
 With our schema successfully registered, consumers have the ability to send a ```GET``` request to the schema-registry, retrieving the schema (format) associated with a specific ```subject```. For instance, if a consumer needs the schema for subject ```sensors``` it can use the information obtained from the following URL:
 ```http://localhost:8081/subjects/sensors/versions/1```
