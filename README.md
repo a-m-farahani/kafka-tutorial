@@ -158,7 +158,7 @@ here is the result of running both producer and consumer scripts:
 
 <p align="justify">
 Schema registry is a service in the Kafka ecosystem that is used for managing and storing the schemas of messages produced and consumed by Kafka producers and consumers. 
-It is recommended hat each producer registers the schema of its messages in schema-registry so the consumers can read the schema and understand the format of the messages they consume.
+It is recommended that each producer registers the schema of its messages in schema-registry so the consumers can read the schema and understand the format of the messages they consume.
 </p>
 
 > Schema Registry provides several benefits, including data validation, compatibility checking, versioning, and evolution. It also simplifies the development and maintenance of data pipelines and reduces the risk of data compatibility issues, data corruption, and data loss.
