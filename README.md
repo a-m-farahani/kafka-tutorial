@@ -160,10 +160,103 @@ here is the result of running both producer and consumer scripts:
 ### Schema Registry
 
 <p align="justify">
-Schema registry is a service in the Kafka ecosystem that is used for managing and storing the schemas of messages produced and consumed by Kafka producers and consumers. It ensures that the data exchanged between different services using Kafka is well-structured and adheres to a predefined schema. The schema registry is particularly useful in scenarios where different applications or services need to exchange data through Kafka, and it helps in maintaining compatibility and consistency in the data format. It provides a central location to store and retrieve schemas, enabling producers and consumers to work independently while still ensuring that the data exchanged matches the correct schema.
+Schema registry is a service in the Kafka ecosystem that is used for managing and storing the schemas of messages produced and consumed by Kafka producers and consumers. 
+It is recommended hat each producer registers the schema of its messages in schema-registry so the consumers can read the schema and understand the format of the messages they consume.
 </p>
 
 > Schema Registry provides several benefits, including data validation, compatibility checking, versioning, and evolution. It also simplifies the development and maintenance of data pipelines and reduces the risk of data compatibility issues, data corruption, and data loss.
 
+<p align="justify">
+Consider a scenario with 10 producers generating 5 types of messages. Note that these producers serialize their messages into byte arrays before puting them to Kafka, leaving consumers unaware of the message schema or format. To bridge this gap, producers register their message format (schema) in the schema-registry. This allows consumers to retrieve the schema, enabling them to understand the message formats and properly deserialize the messages they consume.
+</p>
+
+<p align="justify">
+For using schema-registry we need to run it first. Confluent has made it simple for us by providing a docker image. We can pull <mark>confluentinc/cp-schema-registry</mark> image from docker hub and run it. To do so, we can modify our <mark>deploy.sh</mark> file to the following:
+</p>
+
+
+[deploy.sh](src/schema-registry/deploy.sh)
+```
+#!/bin/bash
+
+echo "pull confluent kafka image from docker hub..."
+docker pull confluentinc/cp-kafka:7.5.0
+
+echo "Pull confluent schema-registry"
+docker pull confluentinc/cp-schema-registry:7.5.0
+
+docker compose -f compose.yaml up -d
+```
+
+The [compose.yaml](src/schema-registry/compose.yaml) file in this case should have a service definition for schema-registry.
+
+[compose.yaml](src/schema-registry/compose.yaml)
+```
+...
+schema-registry:
+    image: confluentinc/cp-schema-registry:7.5.0
+    hostname: schema-registry
+    container_name: schema-registry
+    ports:
+      - 8081:8081
+    depends_on:
+      - kafka-server
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: "kafka-server:29092"
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+```
+
+Now we can start our Kafka-server, kafka-topic-creator and, schema-registry services by executing the [deploy.sh](src/schema-registry/deploy.sh) script. After a few seconds, ```kafka-server``` is up and running, ```kafka-topic-creator``` creates a topic with the name "sensors", and ```schema-registry``` runs a web service on port ```8081``` which services can send their requests to it and register or read schemas. 
+To read more info about ```schema-registry``` web service and its API go to [this](https://docs.confluent.io/platform/current/schema-registry/develop/using.html) link.
+
+To register a new schema in ```schema-registry```, we use a simple python code which sends a ```POST``` request to the schema-registry web service. The following code registers a protobuf schema:
+
+[register-protobuf-schema.py](src/schema-registry/register-protobuf-schema.py)
+```python
+import requests
+import json
+
+PROTO = """
+syntax = "proto3";
+message Measurement {
+    string id = 1;
+    int64 timestamp = 2;
+    double value = 3;
+    uint32 quality = 4;
+}"""
+
+payload = {
+    "schemaType": "PROTOBUF",
+    "schema": PROTO
+    }
+
+response = requests.post("http://localhost:8081/subjects/sensors/versions", data=json.dumps(payload))
+if response.ok:
+    print("schema registered successfully!")
+else:
+    print("failed to register schema.")
+```
+
+As can be seen, we simply define a string variable containing the protobuf definition. We simply send a ```POST``` request to the schema-registry web service and ask it to register our schema into ```sensors``` subject. Note that we specified the type of our schema by defining ```"schemaType": "PROTOBUF"```. If you want to register a json schema, you should set ```"schemaType": "JSON"```. [register-json-schema.py](src/schema-registry/register-json-schema.py) shows an example of registering a json schema.
+
+After registering a schema in ```schema-registry``` you can verify that by sending a ```GET``` request to its web service or simply open your browser and go to folloing URL:
+```http://localhost:8081/subjects/sensors/versions/```
+or
+```http://192.168.210.128:8081/subjects/```
+
+In general, the URL format is as follows:
+```http://your-schema-registry-url/subjects/your-subject-name/versions```
+
+Now our schema is registered, consumers can send ```GET``` request to the schema-registry and get the schema(format) of a specific ```subject```.
+
+With our schema successfully registered, consumers have the ability to send a ```GET``` request to the schema-registry, retrieving the schema (format) associated with a specific ```subject```." For instance, if a consumer needs the schema for subject ```sensors``` it can use the information obtained from the following URL:
+```http://localhost:8081/subjects/sensors/versions/1```
+
+For ```unregistering``` or deleting a schema from schema-registry, we can send a ```DELETE``` request to the schema-registry. Here is an example:
+ ```python
+import requests
+requests.delete("http://localhost:8081/subjects/sensors/versions/1")
+ ```
 
 to be continued ...

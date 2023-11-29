@@ -37,7 +37,6 @@ services:
 
   schema-registry:
     image: confluentinc/cp-schema-registry:7.5.0
-    # image: ${SCADA_REGISTRY}/sc-schema-registry
     hostname: schema-registry
     container_name: schema-registry
     ports:
