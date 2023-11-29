@@ -250,7 +250,7 @@ In general, the URL format is as follows:
 
 Now our schema is registered, consumers can send ```GET``` request to the schema-registry and get the schema(format) of a specific ```subject```.
 
-With our schema successfully registered, consumers have the ability to send a ```GET``` request to the schema-registry, retrieving the schema (format) associated with a specific ```subject```." For instance, if a consumer needs the schema for subject ```sensors``` it can use the information obtained from the following URL:
+With our schema successfully registered, consumers have the ability to send a ```GET``` request to the schema-registry, retrieving the schema (format) associated with a specific ```subject```. For instance, if a consumer needs the schema for subject ```sensors``` it can use the information obtained from the following URL:
 ```http://localhost:8081/subjects/sensors/versions/1```
 
 For ```unregistering``` or deleting a schema from schema-registry, we can send a ```DELETE``` request to the schema-registry. Here is an example:
