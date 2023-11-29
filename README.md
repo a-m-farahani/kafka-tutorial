@@ -239,9 +239,11 @@ As can be seen, we simply define a string variable containing the protobuf defin
 
 After registering a schema in ```schema-registry``` you can verify that by sending a ```GET``` request to its web service or simply open your browser and go to folloing URL:
 
-```http://localhost:8081/subjects/sensors/versions/```
+```
+http://localhost:8081/subjects/sensors/versions/
 or
-```http://192.168.210.128:8081/subjects/```
+http://localhost:8081/subjects/
+```
 
 In general, the URL format is as follows:
 ```http://your-schema-registry-url/subjects/your-subject-name/versions```
