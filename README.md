@@ -259,4 +259,5 @@ import requests
 requests.delete("http://localhost:8081/subjects/sensors/versions/1")
  ```
 
+### Kafka Connect
 to be continued ...
